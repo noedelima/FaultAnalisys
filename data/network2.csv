@@ -1,0 +1,4 @@
+tag,from,to,Rserie,Xserie,Bshunt
+branch:0102,1,2,0,0.5,0
+Branch:0103,1,3,0,0.2,0
+Branch:0203,2,3,0,0.4,0

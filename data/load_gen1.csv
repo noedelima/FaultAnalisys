@@ -1,0 +1,4 @@
+tag,locate,Rserie,Xserie,Bshunt
+gen:01,1,0,0.20,0
+gen:02,10,0,0.15,0
+gen:03,11,0,0.25,0
