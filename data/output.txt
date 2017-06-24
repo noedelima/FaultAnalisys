@@ -1,0 +1,44 @@
+Início da execução do programa: 
+Jun 24 2017 >> 00:17:12
+A lista de conexões entre barras tem 3 elementos:
+Conexão da barra 1 para a barra 2 identificada como branch:0102
+Conexão da barra 1 para a barra 3 identificada como Branch:0103
+Conexão da barra 2 para a barra 3 identificada como Branch:0203
+A lista de conexões com a referência tem 3 elementos:
+Conexão na barra 1 identificado como gen:01
+Conexão na barra 2 identificado como gen:02
+Conexão na barra 3 identificado como gen:03
+A matriz Ybus da rede é:
+
+[[  (0,-7),    (0,2),    (0,5)];
+ [   (0,2), (0,-4.5),  (0,2.5)];
+ [   (0,5),  (0,2.5), (0,-7.5)]]
+
+A matriz  de admitância equivalente Thevenin da rede é:
+
+[[(0,-8.25),     (0,2),     (0,5)];
+ [    (0,2),  (0,-5.5),   (0,2.5)];
+ [    (0,5),   (0,2.5),    (0,-8)]]
+
+A Zbarra obtida por inversão é:
+
+[[(-0,0.410605030591434), (-0,0.309993201903467),  (-0,0.35350101971448)];
+ [(-0,0.309993201903467), (-0,0.445955132562882), (-0,0.333106730115567)];
+ [ (-0,0.35350101971448), (-0,0.333106730115567), (-0,0.450033990482665)]]
+
+Aa colunas ímpares da Zbarra são:
+Coluna 1:
+[[(-0,0.410605030591434)];
+ [(-0,0.309993201903467)];
+ [ (-0,0.35350101971448)]]
+Coluna 3:
+[[ (-0,0.35350101971448)];
+ [(-0,0.333106730115567)];
+ [(-0,0.450033990482665)]]
+
+Matriz Zbus por montagem direta:
+[[(0,0.410605030591434), (0,0.309993201903467),  (0,0.35350101971448)];
+ [(0,0.309993201903467), (0,0.445955132562882), (0,0.333106730115568)];
+ [ (0,0.35350101971448), (0,0.333106730115568), (0,0.450033990482665)]]
+Fim da execução do programa: 
+Jun 24 2017 >> 00:17:12
