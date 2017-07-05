@@ -13,10 +13,14 @@
 #include <complex>
 #include "topology.hpp"
 #include "impedance.hpp"
+#include "stateequations.hpp"
+#include "faultanalysis.hpp"
 using namespace std;
 
+#define pi 3.14159265358979;
+
 int main() {
-	string net = "3";
+	string net = "1"; // Choose system to run
 	cout << "!!!Hello World!!!" << endl;
 	IOFormat HeavyFmt(FullPrecision, 0, ", ", ";\n", "[", "]", "[", "]");
 	IOFormat matlabFmt(FullPrecision, 0, ", ", "; ", "[", "]", "", "");
@@ -54,13 +58,48 @@ int main() {
 	fileout << endl;
 	MatrixXcd Zbdir = Zbus(path+netname+extension, path+genname+extension);
 	fileout << "Matriz Zbus por montagem direta:" << endl << Zbdir.format(HeavyFmt) << endl;
+	fileout << endl;
+	VectorXcd V = Vfaultsym(Yb, path+genname+extension, 2, 0);
+	fileout << "O vetor de tensões de falta é:" << endl;
+	printmatrix(V);
+	fileout << endl << endl;
+	MatrixXcd Iflow = Current(Yth, V);
+	fileout << "Assim, temos as seguintes correntes de falta:" << endl;
+	for (int i=0; i<Yb.rows(); i++){
+		for (int j=i+1; j<Yb.cols(); j++){
+			if (abs(Yth(i,j))>0.001){
+				//Iflow(i,j) = Yth(i,j)*(V(i)-V(j));
+				//Iflow(j,i) = -Iflow(i,j);
+				fileout << "A corrente Icc de curto da linha " << i+1 << " para a linha " << j+1 << " é "
+						<< abs(Iflow(i,j)) << " /_ " << 180*arg(Iflow(i,j))/pi;
+				fileout << "º pu" << endl;
+			}
+		}
+	}
+	/*cout << endl << endl;
+	Matrix<Matrix3cd, Dynamic, Dynamic> M(3,4);
+	for (int i=0; i<3; i++){
+		for (int j=0; j<4; j++){
+			M(i,j) = Matrix3cd::Identity(3,3);
+		}
+	}
+	Matrix<Matrix3cd, Dynamic, Dynamic> N(4,3);
+	for (int i=0; i<4; i++){
+		for (int j=0; j<3; j++){
+			N(i,j) = Matrix3cd::Identity(3,3);
+		}
+	}
+	Matrix<Matrix3cd, Dynamic, Dynamic> P(3,3);
+	P = ProdMatrixOverload(M, N);
+	for (int i=0; i<3; i++){
+		for (int j=0; j<3; j++){
+			printmatrix(P(i,j));
+		}
+	}*/
+	fileout << endl << endl;
 	fileout << "Fim da execução do programa: " << endl << __DATE__ << " >> " << __TIME__ << endl;
 	fileout.close();
 	cout << "Continuação do programa" << endl;
-	cout << "Produto da Zbus pela Ythev:" << endl << (Yth*Zbdir).format(HeavyFmt) << endl;
-	complex<double> resto = (Yth*Zbdir).determinant();
-	cout << "O módulo do determinante desta matriz é " << pow((resto.real()*resto.real()+resto.imag()*resto.imag()), 0.5);
-	cout << endl;
 	cout << "Saída normal" << endl;
     return 0;
 }

@@ -95,7 +95,7 @@ MatrixXcd Zt4(MatrixXcd Z, branch B){
 	M.block(0,0,Z.rows(),Z.cols()) << Z;
 	M.block(0,dim,dim,1) << (Z.block(0,i,dim,1) - Z.block(0,j,dim,1));
 	M.block(dim,0,1,dim) << (Z.block(i,0,1,dim) - Z.block(j,0,1,dim));
-	M(dim,dim) = Z(i,i) + Z(j,j) - Z(i,j) - Z(j,i) + zb;
+	M(dim,dim) = Z(i,i) + Z(j,j) - Z(i,j) - Z(j,i) + zb; /* Don't include parallel values from lines
 	double tol = 0.1; // Minimal parallel admitance to include
 	if (zsh.real() > tol || zsh.imag() > tol){
 		Z = kron(M);
@@ -108,7 +108,7 @@ MatrixXcd Zt4(MatrixXcd Z, branch B){
 		M.block(0,dim,dim,1) << Z.block(0,j,dim,1);
 		M.block(dim,0,1,dim) << Z.block(j,0,1,dim);
 		M(dim,dim) = Z(j,j) + zsh;
-	}
+	}*/
 	Z = kron(M);
 	return Z;
 } // New connection from an existent bus to another existent bus
